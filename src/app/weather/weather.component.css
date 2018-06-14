@@ -1,0 +1,17 @@
+#active{
+  top: 60px;
+  position: relative;
+}
+#temp{
+  position: absolute;
+  top: 15px;
+  left: 65px;
+}
+table{
+  top: 70px;
+  position: relative;
+  height: 80px;
+}
+tr,td{
+  width: 150px;
+}
