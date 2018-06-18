@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {City} from '../city';
 import {WeatherService} from '../weather.service';
-import {promise} from 'selenium-webdriver';
 
 @Component({
   selector: 'app-city',
@@ -19,21 +17,15 @@ export class CityComponent implements OnInit {
   }
 
   setName(value) {
-    let city = new City();
-    const weatherSTemp = this.weatherService.weather;
-
+    const me = this;
     this.weatherService.getCityByName(value)
-      .subscribe(myCity => {
-        city = myCity;
+      .then(function (myCity) {
+        const api = me.weatherService.requestApi(myCity.name, myCity.country);
+        me.checkOnCache(me, api);
       });
-
-    const api = this.weatherService.requestApi(city.name, city.country);
-
-    this.checkOnCache(api, weatherSTemp);
   }
 
-  checkOnCache(api, weatherSTemp) {
-    const me = this;
+  checkOnCache(me, api) {
     let flag = true;
     console.log('check On Cache');
 
@@ -46,21 +38,21 @@ export class CityComponent implements OnInit {
         urlsApi.forEach(function (urlApi) {
           if (api === urlApi.url) {
             urlApi.json().then(function (response) {
-              weatherSTemp.weatherById(response);
+              me.weatherService.weather.weatherById(response);
             });
             flag = false;
           }
         });
         if (flag) {
-          me.checkOnNet(api, weatherSTemp);
+          me.checkOnNet(api, me);
         }
       } else {
-        me.checkOnNet(api, weatherSTemp);
+        me.checkOnNet(api, me);
       }
     });
   }
 
-  checkOnNet(api, weatherSTemp) {
+  checkOnNet(api, me) {
     console.log('check On Net');
     caches.open('weather-api').then(function (cache) {
       fetch(`${api}`).then(function (response) {
@@ -71,7 +63,7 @@ export class CityComponent implements OnInit {
         cache.put(`${api}`, response);
         return resData.json();
       }).then(function (json) {
-        weatherSTemp.weatherById(json);
+        me.weatherService.weather.weatherById(json);
       });
     });
   }

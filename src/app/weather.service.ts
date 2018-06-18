@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {Observable, of} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
 import {City} from './city';
-import {CITIES} from './mock';
 import {Weather} from './weather';
+import {IndexedDBService} from './indexed-db.service';
 
 const KEY = 'e76868e4617fa9179c42aa2672b286b5';
 
@@ -13,15 +11,17 @@ const KEY = 'e76868e4617fa9179c42aa2672b286b5';
 })
 export class WeatherService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private indexedDBService: IndexedDBService) {
   }
 
   // id: number;
   weather = new Weather();
 
-  getCityByName(name): Observable<any> {
-    const cityFind = CITIES.find(city => city.name === name);
-    return of(cityFind);
+  getCityByName(name): Promise<City> {
+    return this.indexedDBService.getByName(name);
+    // const cityFind = CITIES.find(city => city.name === name);
+    // return of(cityFind);
   }
 
   // getCity(id: number): Observable<City> {
