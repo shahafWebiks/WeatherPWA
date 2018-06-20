@@ -1,0 +1,7 @@
+<div id="newCity" *ngIf="weather.addCity">
+  <form id="formAdd" action="#">
+    Enter City Name: <input id="cityName"/>
+    Enter The Country: <input id="cityCountry"/>
+    <button id="btnAdd" (click)="addNewCity()">Add</button>
+  </form>
+</div>

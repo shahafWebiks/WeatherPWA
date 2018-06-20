@@ -1,0 +1,13 @@
+#newCity{
+  position: relative;
+  top: 60px;
+}
+input{
+  position: relative;
+  display: block;
+}
+
+#btnAdd {
+  position: relative;
+  top: 20px;
+}

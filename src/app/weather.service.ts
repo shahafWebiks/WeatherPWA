@@ -11,12 +11,16 @@ const KEY = 'e76868e4617fa9179c42aa2672b286b5';
 })
 export class WeatherService {
 
-  constructor(private http: HttpClient,
-              private indexedDBService: IndexedDBService) {
-  }
-
   // id: number;
   weather = new Weather();
+  newCity = new City();
+
+  // addCity: boolean;
+
+  constructor(private http: HttpClient,
+              private indexedDBService: IndexedDBService) {
+    // this.addCity = false;
+  }
 
   getCityByName(name): Promise<City> {
     return this.indexedDBService.getByName(name);
@@ -50,4 +54,10 @@ export class WeatherService {
   //     return of(result as T);
   //   };
   // }
+
+  makeDataCity(city, country) {
+    this.newCity.name = city;
+    this.newCity.country = country;
+    this.indexedDBService.addNewCityDB(this.newCity);
+  }
 }

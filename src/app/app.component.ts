@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {IndexedDBService} from './indexed-db.service';
+import {CityComponent} from './city/city.component';
+import {WeatherService} from './weather.service';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +9,6 @@ import {IndexedDBService} from './indexed-db.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-
 
   constructor() {
   }

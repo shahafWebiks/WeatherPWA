@@ -7,12 +7,14 @@ import {WeatherComponent} from './weather/weather.component';
 import {HttpClientModule} from '@angular/common/http';
 import {ServiceWorkerModule} from '@angular/service-worker';
 import {environment} from '../environments/environment';
+import { NewCityComponent } from './new-city/new-city.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CityComponent,
-    WeatherComponent
+    WeatherComponent,
+    NewCityComponent
   ],
   imports: [
     HttpClientModule,

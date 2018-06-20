@@ -1,3 +1,5 @@
+import {b} from '@angular/core/src/render3';
+
 export class Weather {
   country: string;
   name: string;
@@ -6,6 +8,7 @@ export class Weather {
   description: string;
   humidity: number;
   speed: number;
+  addCity: boolean;
 
   constructor() {
     this.country = '';
@@ -15,7 +18,9 @@ export class Weather {
     this.description = '';
     this.humidity = 0;
     this.speed = 0;
+    this.addCity = false;
   }
+
   weatherById(weatherApi) {
     let temp: any;
     if (temp = weatherApi['weather'][0]) {

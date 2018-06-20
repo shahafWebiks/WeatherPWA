@@ -25,4 +25,8 @@ export class IndexedDBService {
   getByName(indexName): Promise<City> {
     return this.db.getByIndex('CitiesMock', 'name', indexName);
   }
+
+  addNewCityDB(newCity) {
+    this.db.add('CitiesMock', newCity);
+  }
 }

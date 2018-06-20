@@ -8,7 +8,6 @@ import {WeatherService} from '../weather.service';
 })
 export class CityComponent implements OnInit {
 
-
   constructor(private weatherService: WeatherService) {
   }
 
@@ -66,5 +65,9 @@ export class CityComponent implements OnInit {
         me.weatherService.weather.weatherById(json);
       });
     });
+  }
+
+  changeAddCity() {
+    this.weatherService.weather.addCity = true;
   }
 }
